@@ -1,3 +1,4 @@
 # giga_bach
 
-dsfsfsdfsdf
+## 11월 14일
+작업 환경 설정
