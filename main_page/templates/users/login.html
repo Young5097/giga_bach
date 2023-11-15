@@ -1,0 +1,25 @@
+<h1>로그인</h1>
+<form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <div>
+        <label for="username">사용자 ID</label>
+        <input type="text" name="username" id="username">
+    </div>
+    <div>
+        <label for="password">비밀번호</label>
+        <input type="password" name="password" id="password">
+    </div>
+    <button type="submit">로그인</button>
+</form>
+
+<!-- 아이디 찾기, 비밀번호 찾기, 회원 가입 링크 -->
+<div>
+    <p>계정 관리:</p>
+    <ul>
+        <li><a href="{% url 'find_username' %}">아이디 찾기</a></li>
+        <li><a href="#reset_password">비밀번호 찾기</a></li>
+        <li><a href="{% url 'signup' %}">회원 가입</a></li>
+    </ul>
+</div>
+
+

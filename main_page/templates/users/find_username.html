@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>아이디 찾기</title>
+</head>
+<body>
+
+    <h1>아이디 찾기</h1>
+
+    <form method="post" action="{% url 'find_username' %}">
+        {% csrf_token %}
+        <div>
+            <label for="first_name">이름</label>
+            <input type="text" name="first_name" id="first_name">
+        </div>
+        <div>
+            <label for="email">이메일</label>
+            <input type="email" name="email" id="email">
+        </div>
+        <button type="submit">찾기</button>
+    </form>
+
+</body>
+</html>
