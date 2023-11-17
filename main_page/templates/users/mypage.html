@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>마이페이지</title>
+</head>
+<body>
+
+<h2>마이페이지</h2>
+
+<form method="post" action="{% url 'mypage' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">저장하기</button>
+</form>
+
+</body>
+</html>

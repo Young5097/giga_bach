@@ -17,7 +17,13 @@
             <a href="">게시판</a>
         </div>
         <div class="login">
-            <a class="login-btn" href="{% url 'login' %}">로그인</a>
+            {% if user.is_authenticated %}
+                <a class="logout-btn" href="{% url 'logout' %}">로그아웃</a>
+                <a class="mypage-btn" href="{% url 'mypage' %}">마이페이지</a>
+            {% else %}
+                <a class="login-btn" href="{% url 'login' %}">로그인</a>
+                <a class="signup-btn" href="{% url 'signup' %}">회원가입</a>
+            {% endif %}
         </div>
     </div>
 

@@ -1,9 +1,9 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.contrib import messages
-from .forms import SignUpForm, FindUsernameForm
+from .forms import FindUsernameForm, SignUpForm
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserChangeForm
 
 
 # Create your views here.
@@ -34,25 +34,51 @@ def signup_view(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("/")  # 회원가입 후 리다이렉트할 페이지
+            # 회원가입 성공 후 자동으로 로그인
+            username = form.cleaned_data["username"]
+            password = form.cleaned_data["password1"]
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect("/")
     else:
         form = SignUpForm()
 
     return render(request, "users/signup.html", {"form": form})
 
 
-# 아이디 찾기
+# 아이디 찾기 뷰
 def find_username_view(request):
+    username = None
+
     if request.method == "POST":
         form = FindUsernameForm(request.POST)
         if form.is_valid():
-            name = request.POST.get("name", "")
+            first_name = form.cleaned_data["first_name"]
             email = form.cleaned_data["email"]
 
-            try:
-                user = User.objects.get(name=name, email=email)
-                return HttpResponse(f"찾은 사용자 이름: {user.username}")
-            except User.DoesNotExist:
-                return HttpResponse("해당하는 사용자를 찾을 수 없습니다.")
+            # 아이디를 first_name과 email로 찾기
+            username = (
+                User.objects.filter(first_name=first_name, email=email)
+                .values_list("username", flat=True)
+                .first()
+            )
 
-    return render(request, "users/find_username.html", {"form": form})
+    else:
+        form = FindUsernameForm()
+
+    return render(
+        request, "users/find_username.html", {"form": form, "username": username}
+    )
+
+
+# 마이페이지 뷰 (로그인 필수)
+def mypage_view(request):
+    if request.method == "POST":
+        form = UserChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            # 사용자 정보가 업데이트되면 어떤 처리를 추가할 수 있습니다.
+    else:
+        form = UserChangeForm(instance=request.user)
+
+    return render(request, "users/mypage.html", {"form": form})
