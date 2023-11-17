@@ -1,11 +1,10 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import FindUsernameForm, SignUpForm
+from .forms import FindUsernameForm, SignUpForm, UserProfileForm
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserChangeForm
-
-
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 # Create your views here.
 def main(request):
@@ -64,13 +63,33 @@ def find_username_view(request):
 
 # 마이페이지 뷰 (로그인 필수)
 def mypage_view(request):
+    user = request.user
     if request.method == 'POST':
-        form = UserChangeForm(request.POST, instance=request.user)
+        form = UserProfileForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
-            # 사용자 정보가 업데이트되면 어떤 처리를 추가할 수 있습니다.
     else:
-        form = UserChangeForm(instance=request.user)
-
+        form = UserProfileForm(instance=user)
     return render(request, 'users/mypage.html', {'form': form})
 
+# 회원 정보 수정
+def edit_profile(request):
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('mypage')
+    else:
+        form = UserProfileForm(instance=request.user)
+
+    return render(request, 'users/edit_profile.html', {'form': form})
+
+# 회원 탈퇴
+def delete_account(request):
+    if request.method == 'POST':
+        user = request.user
+        user.delete()  # 회원 삭제
+        logout(request)  # 로그아웃
+        return redirect('/')  # 사용자를 홈 페이지로 리다이렉트
+
+    return render(request, 'users/delete_account.html')
