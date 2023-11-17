@@ -1,17 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>마이페이지</title>
-</head>
-<body>
-
-<h2>마이페이지</h2>
-
-<form method="post" action="{% url 'mypage' %}">
+{% block content %}
+<h2>Mypage</h2>
+  
+{% if edit_mode %}
+  <form id="edit-mode-form" method="post" action="{% url 'mypage' %}">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">저장하기</button>
-</form>
-
-</body>
-</html>
+  </form>
+{% else %}
+  <div id="read-mode-info">
+    <p>이름: {{ user.first_name }}</p>
+    <p>아이디: {{ user.username }}</p>
+    <p>이메일: {{ user.email }}</p>
+  </div>
+<a href="{% url 'edit_profile' %}">프로필 수정하기</a>
+<a href="{% url 'delete_account' %}">회원 탈퇴</a>
+  </form>
+{% endif %}
+{% endblock %}

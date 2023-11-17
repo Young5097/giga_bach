@@ -1,9 +1,10 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import FindUsernameForm, SignUpForm
+from .forms import FindUsernameForm, SignUpForm, UserProfileForm
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 
 # Create your views here.
@@ -77,7 +78,6 @@ def mypage_view(request):
         form = UserChangeForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            # 사용자 정보가 업데이트되면 어떤 처리를 추가할 수 있습니다.
     else:
         form = UserChangeForm(instance=request.user)
 

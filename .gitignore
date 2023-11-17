@@ -10,8 +10,5 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 
-<<<<<<< HEAD
-=======
 .idea/
->>>>>>> 8c21ae5d0a653fd00a209e6b82f2a538d0d4c73e
 migrations/

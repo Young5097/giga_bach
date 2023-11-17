@@ -10,6 +10,10 @@
     {% if username %}
         <p>찾은 아이디: {{ username }}</p>
     {% endif %}
+    
+    {% if not username and request.method == "POST" %}
+        <p>아이디를 찾지 못했습니다.</p>
+    {% endif %}
 
     <form method="post" action="{% url 'find_username' %}">
         {% csrf_token %}

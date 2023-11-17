@@ -1,0 +1,8 @@
+{% block content %}
+  <h2>Delete Account</h2>
+  <p>정말로 회원 탈퇴하시겠습니까?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">회원 탈퇴</button>
+  </form>
+{% endblock %}
