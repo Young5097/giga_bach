@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import FindUsernameForm, SignUpForm, UserProfileForm
+from .forms import FindUsernameForm, SignUpForm, UserProfileForm, User
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
