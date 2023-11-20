@@ -133,3 +133,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGOUT_REDIRECT_URL = "/"  # 로그아웃 후 이동할 URL
 LOGIN_URL = "login"
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
