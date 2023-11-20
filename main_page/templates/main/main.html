@@ -12,9 +12,9 @@
     <div class="topnav">
         <div class="menu-factor">
             <a class="active" href="{% url 'main' %}">메인페이지</a>
-            <a href="">음원생성</a>
-            <a href="">보컬생성</a>
-            <a href="">게시판</a>
+            <a href="{% url 'make_song' %}">음원생성</a>
+            <a href="{% url 'make_vocal' %}">보컬생성</a>
+            <a href="{% url 'board' %}">게시판</a>
         </div>
         <div class="login">
             {% if user.is_authenticated %}
@@ -38,8 +38,8 @@
     </div>
 
     <div class="bottom-buttons">
-        <a href="">음원생성 페이지로 이동</a>
-        <a href="">보컬생성 페이지로 이동</a>
+        <a href="{% url 'make_song' %}">음원생성 페이지로 이동</a>
+        <a href="{% url 'make_vocal' %}">보컬생성 페이지로 이동</a>
     </div>
 </body>
 </html>

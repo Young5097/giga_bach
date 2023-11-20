@@ -13,8 +13,8 @@
         <div class="menu-factor">
             <a href="{% url 'main' %}">메인페이지</a>
             <a href="{% url 'make_song' %}">음원생성</a>
-            <a class="active" href="{% url 'make_vocal' %}">보컬생성</a>
-            <a href="{% url 'board' %}">게시판</a>
+            <a  href="{% url 'make_vocal' %}">보컬생성</a>
+            <a class="active"href="{% url 'board' %}">게시판</a>
         </div>
         <div class="login">
             {% if user.is_authenticated %}

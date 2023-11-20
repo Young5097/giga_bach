@@ -32,13 +32,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
     "main_page",
+    "ms_page",
+    "mv_page",
+    "board_page",
 ]
 
 MIDDLEWARE = [
@@ -128,5 +131,5 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "APTITUDE", "static")]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-LOGOUT_REDIRECT_URL = '/'  # 로그아웃 후 이동할 URL
-LOGIN_URL = 'login'
+LOGOUT_REDIRECT_URL = "/"  # 로그아웃 후 이동할 URL
+LOGIN_URL = "login"
