@@ -4,7 +4,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'style/board_page/create_post.css' %}">
     <h3>게시물 작성</h3>
 
-    <form method="post" action="{% url 'create_post' %}">
+    <form method="post" action="{% url 'create_post' %}" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">작성 완료</button>

@@ -1,0 +1,8 @@
+{% block content %}
+    <h3>게시글 수정</h3>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">수정 완료</button>
+    </form>
+{% endblock %}
