@@ -28,23 +28,12 @@
     </div>
 
     {% block content %}
-    <h3>게시판</h3>
+    <h3>게시물 작성</h3>
 
-    {% for post in posts %}
-        <div class="post">
-            <h3>{{ post.title }}</h3>
-            <p>{{ post.content }}</p>
-            <p>작성자: {{ post.author.username }}</p>
-            <p>작성일: {{ post.created_at }}</p>
-        </div>
-    {% endfor %}
-
-    {% if user.is_authenticated %}
-        <a href="{% url 'create_post' %}">게시글 작성</a>
-    {% else %}
-        <p>게시글을 작성하려면 로그인이 필요합니다.</p>
-    {% endif %}
-    {% endblock %}  
-
+    <form method="post" action="{% url 'create_post' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">작성 완료</button>
+    </form>
+    {% endblock %}
 </body>
-</html>
