@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>아이디 찾기</title>
-</head>
-<body>
-
+{% extends 'base.html' %}
+    {% block content %}
     <h2>아이디 찾기</h2>
-
     {% if username %}
         <p>찾은 아이디: {{ username }}</p>
     {% endif %}
@@ -23,5 +17,4 @@
     </form>
     <br>
     <a href="{% url 'main' %}">취소</a></li>
-</body>
-</html>
+    {% endblock %}

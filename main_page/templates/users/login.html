@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
 <h1>로그인</h1>
 <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
@@ -23,5 +25,4 @@
     <br>
     <a href="{% url 'main' %}">취소</a></li>
 </div>
-
-
+{% endblock %}
