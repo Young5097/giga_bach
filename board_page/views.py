@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import PostForm
 from .models import Post
 from django.contrib.auth.decorators import login_required
@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 def board(request):
     posts = Post.objects.all()
-    return render(request, "board.html", {"posts": posts})
+    return render(request, "board.html", {"posts": posts, "user": request.user})
 
 
 @login_required
@@ -23,3 +23,14 @@ def create_post(request):
         form = PostForm()
 
     return render(request, "create_post.html", {"form": form})
+
+
+@login_required
+def delete_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+
+    # Check if the current user has permission to delete the post
+    if request.user == post.author or request.user.is_superuser:
+        post.delete()
+
+    return redirect("board")
