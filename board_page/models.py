@@ -9,10 +9,10 @@ class Post(models.Model):
     content = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
-    audio_file = models.FileField(upload_to='audio/', null=True, blank=True)
+    audio_file = models.FileField(upload_to="media/board_audio", null=True, blank=True)
 
     def __str__(self):
         return self.title
-    
+
     class Meta:
-        ordering = ['-created_at']  # 최신 순으로 정렬
+        ordering = ["-created_at"]  # 최신 순으로 정렬

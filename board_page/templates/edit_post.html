@@ -1,4 +1,7 @@
+{% extends 'base.html' %}
 {% block content %}
+{% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style/board_page/edit_post.css' %}">
     <h3>게시글 수정</h3>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
