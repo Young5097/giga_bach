@@ -59,7 +59,7 @@ ROOT_URLCONF = "APTITUDE.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, "APTITUDE", "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
