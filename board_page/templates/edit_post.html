@@ -5,4 +5,5 @@
         {{ form.as_p }}
         <button type="submit">수정 완료</button>
     </form>
+    <a href="{% url 'detail_post' post.id %}">취소</a> 
 {% endblock %}

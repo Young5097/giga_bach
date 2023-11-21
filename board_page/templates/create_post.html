@@ -30,7 +30,6 @@
     {% block content %}
     <h3>게시물 작성</h3>
 
-    <form method="post" action="{% url 'create_post' %}" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">작성 완료</button>
