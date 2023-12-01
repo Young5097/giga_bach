@@ -7,7 +7,9 @@ from django.utils import timezone
 class Post(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="board_page_posts"
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     audio_file = models.FileField(upload_to="media/board_audio", null=True, blank=True)
 

@@ -4,10 +4,11 @@ from .models import Post
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 
+
 # Create your views here.
 def board(request):
-    posts = Post.objects.all().order_by("-created_at")
-    return render(request, "board.html", {"posts": posts})
+    posts = Post.objects.all()
+    return render(request, "board.html", {"posts": posts, "user": request.user})
 
 
 @login_required
@@ -23,6 +24,7 @@ def create_post(request):
         form = PostForm()
 
     return render(request, "create_post.html", {"form": form})
+
 
 def post_detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
@@ -55,4 +57,3 @@ def download_audio(request, post_id):
     response = HttpResponse(post.audio_file.read(), content_type="audio/mpeg")
     response["Content-Disposition"] = f'attachment; filename="{post.audio_file.name}"'
     return response
-

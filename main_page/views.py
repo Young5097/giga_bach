@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib.auth.forms import UserChangeForm
+from board_page.models import Post as BoardPagePost
+
 
 # Create your views here.
 def main(request):
@@ -83,22 +85,24 @@ def mypage_view(request):
 
     return render(request, "users/mypage.html", {"form": form})
 
+
 def edit_profile(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = UserProfileForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('mypage')
+            return redirect("mypage")
     else:
         form = UserProfileForm(instance=request.user)
 
-    return render(request, 'users/edit_profile.html', {'form': form})
+    return render(request, "users/edit_profile.html", {"form": form})
+
 
 def delete_account(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         user = request.user
         user.delete()  # 회원 삭제
         logout(request)  # 로그아웃
-        return redirect('main')  # 사용자를 홈 페이지로 리다이렉트
+        return redirect("main")  # 사용자를 홈 페이지로 리다이렉트
 
-    return render(request, 'users/delete_account.html')
+    return render(request, "users/delete_account.html")

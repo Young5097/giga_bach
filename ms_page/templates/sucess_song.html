@@ -2,9 +2,4 @@
 {% block content%}
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'style/ms_page/style.css' %}">
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Upload Audio</button>
-</form>
 {% endblock %}
