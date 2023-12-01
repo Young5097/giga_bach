@@ -7,8 +7,13 @@ from django.http import HttpResponse
 
 # Create your views here.
 def board(request):
+<<<<<<< HEAD
+    posts = Post.objects.all()
+    return render(request, "board.html", {"posts": posts, "user": request.user})
+=======
     posts = Post.objects.all().order_by("-created_at")
     return render(request, "board.html", {"posts": posts})
+>>>>>>> 0461920f334ab3d19e0b9340c8abe14866b8e362
 
 
 @login_required
@@ -25,7 +30,10 @@ def create_post(request):
 
     return render(request, "create_post.html", {"form": form})
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 0461920f334ab3d19e0b9340c8abe14866b8e362
 def post_detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     return render(request, "post_detail.html", {"post": post})
