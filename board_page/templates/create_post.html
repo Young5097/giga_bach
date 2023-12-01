@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
     {% block content %}
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'style/board_page/create_post.css' %}">
     <h3>게시물 작성</h3>
 
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">작성 완료</button>

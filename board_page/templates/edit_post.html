@@ -1,12 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'style/board_page/edit_post.css' %}">
     <h3>게시글 수정</h3>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">수정 완료</button>
     </form>
-    <a href="{% url 'detail_post' post.id %}">취소</a> 
+    <a href="{% url 'post_detail' post.id %}">취소</a> 
 {% endblock %}

@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'style/board_page/post_detail.css' %}">
     <h3>{{ post.title }}</h3>
     <p>{{ post.content }}</p>
     <p>작성자: {{ post.author.username }}</p>
@@ -18,5 +17,5 @@
 
     <a href="{% url 'edit_post' post.id %}">수정</a> 
     <a href="{% url 'board' %}">글 목록</a>
-    <a href="{% url 'delete_post' post.id %}">삭제</a>  <!-- 삭제 링크 추가 -->
+    <a href="{% url 'delete_post' post.id %}">삭제</a>
 {% endblock %}
