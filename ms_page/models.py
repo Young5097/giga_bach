@@ -1,3 +1,5 @@
 from django.db import models
 
-# Create your models here.
+
+class UploadAudio(models.Model):
+    audio_file = models.FileField(upload_to="audio/input_audio/")
