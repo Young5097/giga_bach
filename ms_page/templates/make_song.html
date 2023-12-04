@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block content%}
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'style/ms_page/style.css' %}">
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">생성 시작</button>
-</form>
+<h2>Create a Song</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create</button>
+    </form>
 {% endblock %}

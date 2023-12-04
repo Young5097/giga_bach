@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content%}
+{% load static %}
+<h2>ms_result</h2>
+<ul>
+    {% if midi_file_path %}
+        <p>MIDI file is ready for download: <a href="{% url 'download_midi' %}">Download MIDI</a></p>
+    {% else %}
+        <p>Error: MIDI file not found.</p>
+    {% endif %}
+</ul>
+{% endblock %}

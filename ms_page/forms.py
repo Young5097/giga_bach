@@ -1,10 +1,7 @@
 from django import forms
-from .models import UploadAudio
+from .models import Song
 
-
-class UploadAudioForm(forms.ModelForm):
+class SongForm(forms.ModelForm):
     class Meta:
-        model = UploadAudio
-        fields = ["audio_file"]
-
-    audio_file = forms.FileField(label="오디오 파일", required=False)
+        model = Song
+        fields = ['title', 'audio_file']
