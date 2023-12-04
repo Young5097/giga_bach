@@ -15,5 +15,4 @@ def make_song(request):
 
 
 def sucess_song(request):
-    # 성공 페이지에서 필요한 데이터를 새로 불러올 수 있습니다.
     return render(request, "sucess_song.html")
