@@ -29,6 +29,7 @@ def make_song(request):
 
     return render(request, 'make_song.html', {'form': form})
 
+<<<<<<< HEAD
 def ms_result(request):
     # 세션에서 MIDI 파일의 경로를 가져옴
     midi_file_path = request.session.get('midi_file_path')
@@ -50,3 +51,7 @@ def download_midi(request):
             return response
     else:
         return HttpResponse("Error: MIDI file not found.")
+=======
+def sucess_song(request):
+    return render(request, "sucess_song.html")
+>>>>>>> d5ed5899241e706382af0d71a74f8f76c0d8b055

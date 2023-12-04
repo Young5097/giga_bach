@@ -15,8 +15,8 @@ from midiutil import MIDIFile
 fs = FluidSynth()
 
 # 입력 폴더와 출력 폴더를 설정합니다.
-input_folder = '/Users/bongmin/Desktop/giga_bach/music_files'
-output_folder = '/Users/bongmin/Desktop/giga_bach/get_output_music'
+input_folder = '/Users/bongmin/Desktop/giga_bach/music_files' # 추후 final_midi 폴더로 경로 변경
+output_folder = '/Users/bongmin/Desktop/giga_bach/get_output_music' # complet_wav 폴더로 경로 변경
 
 # 출력 폴더가 없으면 생성합니다.
 if not os.path.exists(output_folder):
