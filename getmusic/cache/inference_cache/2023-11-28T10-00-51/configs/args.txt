@@ -1,0 +1,34 @@
+==> torch version: 1.12.1+cu113
+==> cudnn version: 8302
+==> Cmd:
+['track_generation.py', '--load_path', 'checkpoint.pth', '--file_path', 'example_data/inference']
+==> args:
+  amp: False
+  chord_from_single: False
+  conditional_name: None
+  config_file: configs/train.yaml
+  content_name: None
+  cudnn_deterministic: False
+  cwd: C:\github\muzic\getmusic
+  decode_chord: False
+  dist_url: tcp://127.0.0.1:29500
+  distributed: False
+  do_sample: True
+  file_path: example_data/inference
+  global_rank: 0
+  gpu: 0
+  load_path: checkpoint.pth
+  local_rank: 0
+  name: inference_cache
+  ngpus_per_node: 1
+  no_ema: True
+  node_rank: 0
+  num_node: 1
+  opts: []
+  output: cache
+  save_dir: cache\inference_cache\2023-11-28T10-00-51
+  seed: 0
+  skip_step: 0
+  sync_bn: False
+  tensorboard: False
+  world_size: 1

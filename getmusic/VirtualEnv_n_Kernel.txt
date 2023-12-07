@@ -1,0 +1,75 @@
+------------------------------------------------------------------------------------------
+(A) Install Virutal ENV and Add to Kernel
+
+1. Create VENV
+```
+python -m venv myenv
+```
+
+
+
+```
+2. Other method to create VENV and activating it (change the python version with what you want)
+```
+conda create -n myenv python=3.10
+```
+2.1. List of VENV using conda
+```
+conda env list
+```
+2.3. Activate or Deactivate VENV on terminal
+```
+conda activate <env name>
+conda deactivate <env name>
+```
+
+3. After activate VENV, install ipykernel (make sure already activate)
+```
+pip install ipykernel
+
+```
+
+4. Add VENV to jupyter (you can raname it with anything,ex :myvenv_glassrun)
+```
+python -m ipykernel install --user --name=myenv
+```
+*** it should show this message : Installed kernelspec myenv in /home/user/.local/share/jupyter/kernels/myenv
+
+
+5. See kernel list 
+```
+jupyter kernelspec list
+```
+
+-----------------------------------------------------------------------------------------
+
+(B) ACCESS ON JUPYTER
+
+1. Go to jupyter, choose, and access the VENV
+
+2. Check package on VENV (need to specify the pip location,,,, if not : it will detect base pip)
+```
+!source myenv/bin/pip list
+````
+2. Install package on VENV (need to specify the pip location,,,, if not : it will install on base pip)
+```
+!source myenv/bin/pip install pandas
+````
+
+
+------------------------------------------------------------------------------------------
+
+(B) Remove the virtual ENV
+
+
+5. See kernel list 
+```
+jupyter kernelspec list
+```
+
+6. Remove/uninstall the kernel
+```
+jupyter kernelspec uninstall myenv
+```
+
+-----------------------------------------------------------------------------------------

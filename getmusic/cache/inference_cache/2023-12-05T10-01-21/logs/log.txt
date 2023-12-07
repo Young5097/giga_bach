@@ -1,0 +1,2 @@
+2023-12-05-10-02: Load dictionary: 11879 tokens.
+2023-12-05-10-02: Get lr 3e-06 from base lr 3e-06 with none

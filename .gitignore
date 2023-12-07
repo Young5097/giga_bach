@@ -12,3 +12,8 @@ db.sqlite3-journal
 
 # .idea/
 migrations/
+getmusic/checkpoint.pth
+cloudflared-windows-amd64.exe
+
+.vscode/
+checkpoint.pth
