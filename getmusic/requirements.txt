@@ -1,0 +1,7 @@
+tensorboard
+pyyaml
+tqdn
+transformers
+einops
+miditoolkit
+scipy

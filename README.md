@@ -1,5 +1,9 @@
 # giga_bach
 
+## 12월 6일
+ + https://dashboard.ngrok.com/get-started/setup
+  - ssh colab gpu local연결 키 가져오는 사이트
+
 ## 12월 1일
  + 사용자에게 입력을 받는 부분 
   - midi 파일 여부 

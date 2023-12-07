@@ -1,5 +1,21 @@
 numpy
+pandas
 librosa
+matplotlib
 music21
 midi2audio
 midiutil
+tensorboard
+pyyaml
+tqdm
+transformers
+einops
+scipy
+miditoolkit==1.0.0
+django
+pydub
+midi2audio
+ipython
+music21
+
+# pip install tornado entrypoints
