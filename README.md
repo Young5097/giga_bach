@@ -1,5 +1,8 @@
 # giga_bach
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> a0d2e1cc08ad7740cfae1a91f980200fa9a0a518
 
 ## 12월 6일
  + https://dashboard.ngrok.com/get-started/setup
@@ -22,8 +25,11 @@
 +피치 검출기 추가/음원 추출기 추가
 +midiutil 업데이트로 인한 버전 수정
 
+<<<<<<< HEAD
 =======
 >>>>>>> parent of ae8bfa8 (갱신)
+=======
+>>>>>>> a0d2e1cc08ad7740cfae1a91f980200fa9a0a518
 ## 11월 20일
 + 게시판 생성/수정/삭제 기능 추가
 + 디자인을 위한 부분화

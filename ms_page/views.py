@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.shortcuts import get_object_or_404
 from django.conf import settings
 from .forms import SongForm
-from .sound2to2midi import sound2midi
+from .sound2midi import sound2midi
 from .midi_catcher import identify_instruments
 import os
 
@@ -55,4 +55,3 @@ def download_midi(request):
             return response
     else:
         return HttpResponse("Error: MIDI file not found.")
-

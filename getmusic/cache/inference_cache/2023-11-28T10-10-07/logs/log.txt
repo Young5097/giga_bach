@@ -1,4 +1,0 @@
-2023-11-28-10-10: Load dictionary: 11879 tokens.
-2023-11-28-10-10: Get lr 3e-06 from base lr 3e-06 with none
-2023-11-28-10-10: {'overall': {'trainable': '86.49M', 'non_trainable': '96.0K', 'total': '86.59M'}, 'rfm': {'trainable': '86.49M', 'non_trainable': '96.0K', 'total': '86.59M'}}
-2023-11-28-10-10: inference_cache: global rank 0: prepare solver done!
