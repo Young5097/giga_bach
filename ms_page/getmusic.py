@@ -9,9 +9,11 @@ import subprocess
 
 
 def generate_music(load_path, file_path):
-    directory_path = '/content/drive/MyDrive/giga_bach/getmusic'
+    directory_path = "/content/drive/MyDrive/giga_bach/getmusic"
     os.chdir(directory_path)
-    command = f'python track_generation.py --load_path {load_path} --file_path {file_path}'
+    command = (
+        f"python track_generation.py --load_path {load_path} --file_path {file_path}"
+    )
     subprocess.run(command, shell=True)
 
 
@@ -21,14 +23,16 @@ def convert_midi_to_wav(input_folder, output_folder):
     for filename in os.listdir(input_folder):
         if filename.endswith(".midi") or filename.endswith(".mid"):
             midi_path = os.path.join(input_folder, filename)
-            wav_path = os.path.join(output_folder, os.path.splitext(filename)[0] + ".wav")
+            wav_path = os.path.join(
+                output_folder, os.path.splitext(filename)[0] + ".wav"
+            )
             fs.midi_to_audio(midi_path, wav_path)
 
     print("모든 미디 파일을 WAV 파일로 변환하였습니다.")
 
 
 def play_audio_files(audio_folder):
-    supported_formats = ['.wav', '.mp3', '.ogg', '.flac']
+    supported_formats = [".wav", ".mp3", ".ogg", ".flac"]
 
     for filename in os.listdir(audio_folder):
         if any(filename.endswith(format) for format in supported_formats):
@@ -36,6 +40,12 @@ def play_audio_files(audio_folder):
             display(Audio(file_path, autoplay=True))
 
 
-generate_music('/content/drive/MyDrive/giga_bach/checkpoint.pth', '/content/drive/MyDrive/giga_bach/APTITUDE/media/got_temp_midi')
-convert_midi_to_wav('/content/drive/MyDrive/giga_bach/APTITUDE/media/got_temp_midi', '/content/drive/MyDrive/giga_bach/APTITUDE/media/midi2wav')
-play_audio_files('/content/drive/MyDrive/giga_bach/APTITUDE/media/midi2wav')
+generate_music(
+    "/content/drive/MyDrive/giga_bach/checkpoint.pth",
+    "/content/drive/MyDrive/giga_bach/APTITUDE/media/got_temp_midi",
+)
+convert_midi_to_wav(
+    "/content/drive/MyDrive/giga_bach/APTITUDE/media/got_temp_midi",
+    "/content/drive/MyDrive/giga_bach/APTITUDE/media/midi2wav",
+)
+play_audio_files("/content/drive/MyDrive/giga_bach/APTITUDE/media/midi2wav")

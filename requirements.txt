@@ -5,20 +5,16 @@ matplotlib
 music21
 midi2audio
 midiutil
-<<<<<<< HEAD
 
 miditoolkit==1.0.0
 pydub
 
-=======
->>>>>>> a0d2e1cc08ad7740cfae1a91f980200fa9a0a518
 tensorboard
 pyyaml
 tqdm
 transformers
 einops
 scipy
-<<<<<<< HEAD
 mido
 pretty_midi
 
@@ -27,13 +23,3 @@ django
 # 직접 설치
 #pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu113
 #apt-get install fluidsynth
-=======
-miditoolkit==1.0.0
-django
-pydub
-midi2audio
-ipython
-music21
-
-# pip install tornado entrypoints
->>>>>>> a0d2e1cc08ad7740cfae1a91f980200fa9a0a518
