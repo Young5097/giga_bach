@@ -14,9 +14,6 @@ db.sqlite3-journal
 migrations/
 getmusic/checkpoint.pth
 cloudflared-windows-amd64.exe
-<<<<<<< HEAD
 
 .vscode/
 checkpoint.pth
-=======
->>>>>>> a0d2e1cc08ad7740cfae1a91f980200fa9a0a518

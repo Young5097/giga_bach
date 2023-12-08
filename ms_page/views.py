@@ -23,6 +23,12 @@ def make_song(request):
             else:
                 sound2midi(audio_file_path)
 
+            # 선택된 값을 세션에 저장
+            condition_name = request.POST.getlist("condition")
+            content_name = request.POST.getlist("content")
+            request.session["condition_name"] = condition_name
+            request.session["content_name"] = content_name
+
             # make_song 페이지로 리다이렉트
             return redirect("ms_result")
     else:

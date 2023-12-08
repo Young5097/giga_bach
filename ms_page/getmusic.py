@@ -46,6 +46,6 @@ generate_music(
 )
 convert_midi_to_wav(
     "/content/drive/MyDrive/giga_bach/APTITUDE/media/got_temp_midi",
-    "/content/drive/MyDrive/giga_bach/APTITUDE/media/midi2wav",
+    "/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result",
 )
 play_audio_files("/content/drive/MyDrive/giga_bach/APTITUDE/media/midi2wav")

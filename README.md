@@ -1,5 +1,10 @@
 # giga_bach
 
+## 12 7일
+ + 1. track_generation.py 875번줄 content_text => 악기 넣는 파트 / 어떻게 사용자가 입력을 줄지
+ + 2. choice_inst 함수로 기능하게
+ + 3. ms_result에서 다운/음악재생
+
 ## 12월 6일
  + https://dashboard.ngrok.com/get-started/setup
   - ssh colab gpu local연결 키 가져오는 사이트
