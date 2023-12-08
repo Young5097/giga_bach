@@ -8,10 +8,10 @@ from IPython.display import Audio, display
 import subprocess
 
 
-def generate_music(load_path, file_path):
+def generate_music(load_path, file_path, inst_list, main_inst):
     directory_path = '/content/drive/MyDrive/giga_bach/getmusic'
     os.chdir(directory_path)
-    command = f'python track_generation.py --load_path {load_path} --file_path {file_path}'
+    command = f'python track_generation.py --load_path {load_path} --file_path {file_path} --main_inst {main_inst} --inst_list {inst_list}'
     subprocess.run(command, shell=True)
 
 
@@ -36,6 +36,6 @@ def play_audio_files(audio_folder):
             display(Audio(file_path, autoplay=True))
 
 
-generate_music('/content/drive/MyDrive/giga_bach/checkpoint.pth', '/content/drive/MyDrive/giga_bach/APTITUDE/media/got_temp_midi')
-convert_midi_to_wav('/content/drive/MyDrive/giga_bach/APTITUDE/media/got_temp_midi', '/content/drive/MyDrive/giga_bach/APTITUDE/media/midi2wav')
+generate_music('/content/drive/MyDrive/giga_bach/checkpoint.pth', '/content/drive/MyDrive/giga_bach/APTITUDE/media/got_temp_midi', 'p', 'b d g')
+convert_midi_to_wav('/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result', '/content/drive/MyDrive/giga_bach/APTITUDE/media/midi2wav')
 play_audio_files('/content/drive/MyDrive/giga_bach/APTITUDE/media/midi2wav')

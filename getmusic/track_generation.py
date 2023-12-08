@@ -146,6 +146,11 @@ def get_args():
     parser.add_argument('--chord_from_single', action='store_true', default=False)
     parser.add_argument('--no_ema', action='store_false', default=True)
     
+    # 악기 리스트 받아오기
+    parser.add_argument('--main_inst', nargs='+', type=str, help='main_inst')
+    parser.add_argument('--inst_list', nargs='+', type=str, help='List of musical instruments')
+    
+    
     # args for modify config
     parser.add_argument(
         "opts",
@@ -647,7 +652,7 @@ def main():
         
         conditional_track = np.array([False, False, False, False, False, False, True])
         #conditional_name = input('Select condition tracks (\'b\' for bass, \'d\' for drums, \'g\' for guitar, \'l\' for lead, \'p\' for piano, \'s\' for strings, \'c\' for chords; multiple choices; input any other key to skip):')
-        conditional_name = ['p']
+        conditional_name = args.main_inst
         condition_inst = []
         if 'l' in conditional_name:
             conditional_track[0] = True
@@ -674,7 +679,7 @@ def main():
             
         content_track = np.array([False, False, False, False, False, False, False])
         #content_name = input('Select content tracks (\'b\' for bass, \'d\' for drums, \'g\' for guitar, \'l\' for lead, \'p\' for piano, \'s\' for strings; multiple choices):')
-        content_name = ['b', 'd', 'g']
+        content_name = args.inst_list
         if 'l' in content_name:
             content_track[0] = True
         if 'b' in content_name:
@@ -718,7 +723,7 @@ def main():
 
         midi_obj = encoding_to_MIDI(oct_final, tpc, args.decode_chord)
 
-        save_path = os.path.join(args.file_path, '{}2{}-{}'.format(conditional_name, content_name, file_name.split('/')[-1]))
+        save_path = os.path.join('/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result', file_name.split('/')[-1])
 
         midi_obj.dump(save_path)    
 
