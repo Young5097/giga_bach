@@ -9,7 +9,8 @@ import librosa.display
 import numpy as np
 import pandas as pd
 from music21 import converter, note, stream, environment, instrument
-from midi2audio import FluidSynth
+
+# from midi2audio import FluidSynthchordError
 from midiutil import MIDIFile
 
 

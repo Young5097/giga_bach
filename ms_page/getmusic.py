@@ -8,12 +8,14 @@ from IPython.display import Audio, display
 import subprocess
 
 
-def generate_music(load_path, file_path):
-    directory_path = "/content/drive/MyDrive/giga_bach/getmusic"
+def generate_music(load_path, file_path, condition_name, content_name):
+    directory_path = "G:/내 드라이브/giga_bach/getmusic"
     os.chdir(directory_path)
-    command = (
-        f"python track_generation.py --load_path {load_path} --file_path {file_path}"
-    )
+
+    condition_str = " ".join(condition_name)
+    content_str = " ".join(content_name)
+
+    command = f"python track_generation.py --load_path {load_path} --file_path {file_path} --conditional_name {condition_str} --content_name {content_str}"
     subprocess.run(command, shell=True)
 
 
@@ -40,12 +42,12 @@ def play_audio_files(audio_folder):
             display(Audio(file_path, autoplay=True))
 
 
-generate_music(
-    "/content/drive/MyDrive/giga_bach/checkpoint.pth",
-    "/content/drive/MyDrive/giga_bach/APTITUDE/media/got_temp_midi",
-)
-convert_midi_to_wav(
-    "/content/drive/MyDrive/giga_bach/APTITUDE/media/got_temp_midi",
-    "/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result",
-)
-play_audio_files("/content/drive/MyDrive/giga_bach/APTITUDE/media/midi2wav")
+# generate_music(
+#     "/content/drive/MyDrive/giga_bach/checkpoint.pth",
+#     "/content/drive/MyDrive/giga_bach/APTITUDE/media/got_temp_midi",
+# )
+# convert_midi_to_wav(
+#     "/content/drive/MyDrive/giga_bach/APTITUDE/media/got_temp_midi",
+#     "/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result",
+# )
+# play_audio_files("/content/drive/MyDrive/giga_bach/APTITUDE/media/midi2wav")

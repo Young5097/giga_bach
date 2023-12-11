@@ -3,9 +3,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
 from django.conf import settings
+from django.core.cache import cache
 from .forms import SongForm
 from .sound2midi import sound2midi
 from .midi_catcher import identify_instruments
+from .getmusic import generate_music, convert_midi_to_wav, play_audio_files
 import os
 
 
@@ -16,6 +18,8 @@ def make_song(request):
             song = form.save()
 
             audio_file_path = song.audio_file.path
+
+            request.session.clear()
 
             # 음악 파일이 MIDI 확장자인지 확인
             if audio_file_path.endswith(".midi") or audio_file_path.endswith(".mid"):
@@ -28,6 +32,14 @@ def make_song(request):
             content_name = request.POST.getlist("content")
             request.session["condition_name"] = condition_name
             request.session["content_name"] = content_name
+
+            load_path = "G:/내 드라이브/giga_bach/checkpoint.pth"
+            file_path = "G:/내 드라이브/giga_bach/APTITUDE/media/got_temp_midi"
+            generate_music(load_path, file_path, condition_name, content_name)
+
+            input_folder = "G:/내 드라이브/giga_bach/APTITUDE/media/getmusic_result"
+            output_folder = "G:/내 드라이브/giga_bach/APTITUDE/media/midi2wav"
+            convert_midi_to_wav(input_folder, output_folder)
 
             # make_song 페이지로 리다이렉트
             return redirect("ms_result")
