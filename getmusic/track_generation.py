@@ -149,88 +149,54 @@ class Item(object):
 
 
 def get_args():
-    parser = argparse.ArgumentParser(description="sampling script")
-    parser.add_argument(
-        "--config_file",
-        type=str,
-        default="configs/train.yaml",
-        help="path of config file",
-    )
-    parser.add_argument(
-        "--name",
-        type=str,
-        default="inference_cache",
-        help="the name of this experiment, if not provided, set to"
-        "the name of config file",
-    )
-    parser.add_argument(
-        "--output", type=str, default="cache", help="directory to save the results"
-    )
-    parser.add_argument(
-        "--tensorboard", action="store_true", help="use tensorboard for logging"
-    )
-    parser.add_argument(
-        "--load_path",
-        type=str,
-        default=None,
-        help="path to model that need to be loaded, "
-        "used for loading pretrained model",
-    )
-    parser.add_argument(
-        "--num_node",
-        type=int,
-        default=NUM_NODE,
-        help="number of nodes for distributed training",
-    )
-    parser.add_argument(
-        "--ngpus_per_node", type=int, default=8, help="number of gpu on one node"
-    )
-    parser.add_argument(
-        "--node_rank",
-        type=int,
-        default=NODE_RANK,
-        help="node rank for distributed training",
-    )
-    parser.add_argument(
-        "--dist_url",
-        type=str,
-        default=DIST_URL,
-        help="url used to set up distributed training",
-    )
-    parser.add_argument(
-        "--gpu",
-        type=int,
-        default=0,
-        help="GPU id to use. If given, only the specific gpu will be"
-        " used, and ddp will be disabled",
-    )
-    parser.add_argument(
-        "--local_rank", default=-1, type=int, help="node rank for distributed training"
-    )
-    parser.add_argument("--sync_bn", action="store_true", help="use sync BN layer")
-    parser.add_argument(
-        "--seed", type=int, default=0, help="seed for initializing training. "
-    )
-    parser.add_argument(
-        "--cudnn_deterministic",
-        action="store_true",
-        help="set cudnn.deterministic True",
-    )
-    parser.add_argument(
-        "--amp",
-        action="store_true",
-        default=False,
-        help="automatic mixture of precesion",
-    )
-    parser.add_argument("--do_sample", action="store_false", default=True)
-    parser.add_argument("--conditional_name", type=str, default=None)
-    parser.add_argument("--content_name", type=str, default=None)
-    parser.add_argument("--file_path", type=str, default=None)
-    parser.add_argument("--skip_step", type=int, default=0)
-    parser.add_argument("--decode_chord", action="store_true", default=False)
-    parser.add_argument("--chord_from_single", action="store_true", default=False)
-    parser.add_argument("--no_ema", action="store_false", default=True)
-
+    parser = argparse.ArgumentParser(description='sampling script')
+    parser.add_argument('--config_file', type=str, default='configs/train.yaml', 
+                        help='path of config file')
+    parser.add_argument('--name', type=str, default='inference_cache', 
+                        help='the name of this experiment, if not provided, set to'
+                             'the name of config file') 
+    parser.add_argument('--output', type=str, default='cache', 
+                        help='directory to save the results')    
+    parser.add_argument('--tensorboard', action='store_true', 
+                        help='use tensorboard for logging')
+    parser.add_argument('--load_path', type=str, default=None,
+                        help='path to model that need to be loaded, '
+                             'used for loading pretrained model') 
+    parser.add_argument('--num_node', type=int, default=NUM_NODE,
+                        help='number of nodes for distributed training') 
+    parser.add_argument('--ngpus_per_node', type=int, default=8,
+                        help='number of gpu on one node')
+    parser.add_argument('--node_rank', type=int, default=NODE_RANK,
+                        help='node rank for distributed training')
+    parser.add_argument('--dist_url', type=str, default=DIST_URL, 
+                        help='url used to set up distributed training')
+    parser.add_argument('--gpu', type=int, default=0,
+                        help='GPU id to use. If given, only the specific gpu will be'
+                        ' used, and ddp will be disabled')
+    parser.add_argument('--local_rank', default=-1, type=int,
+                        help='node rank for distributed training')
+    parser.add_argument('--sync_bn', action='store_true', 
+                        help='use sync BN layer')
+    parser.add_argument('--seed', type=int, default=0, 
+                        help='seed for initializing training. ')
+    parser.add_argument('--cudnn_deterministic', action='store_true', 
+                        help='set cudnn.deterministic True')
+    parser.add_argument('--amp', action='store_true', default=False,
+                        help='automatic mixture of precesion')
+    parser.add_argument('--do_sample', action='store_false', default=True)
+    parser.add_argument('--conditional_name', type=str, default=None)
+    parser.add_argument('--content_name', type=str, default=None)
+    parser.add_argument('--file_path', type=str, default=None)
+    parser.add_argument('--skip_step', type=int, default=0)
+    parser.add_argument('--decode_chord', action='store_true', default=False)
+    parser.add_argument('--chord_from_single', action='store_true', default=False)
+    parser.add_argument('--no_ema', action='store_false', default=True)
+    
+    # 악기 리스트 받아오기
+    parser.add_argument('--main_inst', nargs='+', type=str, help='main_inst')
+    parser.add_argument('--inst_list', nargs='+', type=str, help='List of musical instruments')
+    
+    
     # args for modify config
     parser.add_argument(
         "opts",
@@ -842,8 +808,8 @@ def main():
             continue
 
         conditional_track = np.array([False, False, False, False, False, False, True])
-        # conditional_name = input('Select condition tracks (\'b\' for bass, \'d\' for drums, \'g\' for guitar, \'l\' for lead, \'p\' for piano, \'s\' for strings, \'c\' for chords; multiple choices; input any other key to skip):')
-        conditional_name = ["p"]
+        #conditional_name = input('Select condition tracks (\'b\' for bass, \'d\' for drums, \'g\' for guitar, \'l\' for lead, \'p\' for piano, \'s\' for strings, \'c\' for chords; multiple choices; input any other key to skip):')
+        conditional_name = args.main_inst
         condition_inst = []
         if "l" in conditional_name:
             conditional_track[0] = True
@@ -871,9 +837,9 @@ def main():
             )
 
         content_track = np.array([False, False, False, False, False, False, False])
-        # content_name = input('Select content tracks (\'b\' for bass, \'d\' for drums, \'g\' for guitar, \'l\' for lead, \'p\' for piano, \'s\' for strings; multiple choices):')
-        content_name = ["b", "d", "g"]
-        if "l" in content_name:
+        #content_name = input('Select content tracks (\'b\' for bass, \'d\' for drums, \'g\' for guitar, \'l\' for lead, \'p\' for piano, \'s\' for strings; multiple choices):')
+        content_name = args.inst_list
+        if 'l' in content_name:
             content_track[0] = True
         if "b" in content_name:
             content_track[1] = True
@@ -928,10 +894,7 @@ def main():
 
         midi_obj = encoding_to_MIDI(oct_final, tpc, args.decode_chord)
 
-        save_path = os.path.join(
-            "C:/github/giga_bach/giga_bach/APTITUDE/media/getmusic_result",
-            "{}2{}-{}".format(conditional_name, content_name, file_name.split("/")[-1]),
-        )
+        save_path = os.path.join('/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result', file_name.split('/')[-1])
 
         midi_obj.dump(save_path)
 

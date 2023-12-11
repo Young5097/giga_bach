@@ -277,22 +277,24 @@ def sound2midi(audio_path):  # 오디오 파일 경로 -> input_sound에서 휘�
         ],
         ignore_index=True,
     )
-
+    
     # MIDI 파일 생성을 위한 설정
     midi_stream = stream.Stream()
     midi_stream.append(note.Rest())  # 아무 소리도 나지 않는 레스트 추가
 
     # 키에 따라 MIDI 이벤트 추가
     for index, row in combined_df.iterrows():
-        key = row["key"]
+        key = row['key']
 
         # 'Unknown' 값이 아닌 경우에만 MIDI 노트 이벤트 추가
-        if key != "Unknown":
-            start_time = row["start_time"]
-            end_time = row["end_time"]
+        if key != 'Unknown':
+            start_time = row['start_time']
+            end_time = row['end_time']
 
             # MIDI 노트 이벤트 추가
             midi_stream.append(note.Note(key, quarterLength=end_time - start_time))
+<<<<<<< HEAD
+=======
 
     # MIDI 파일 생성을 위한 설정
     # midi_stream = stream.Score()
@@ -319,6 +321,7 @@ def sound2midi(audio_path):  # 오디오 파일 경로 -> input_sound에서 휘�
     #         n.instrument = instrument.Violin()  # 다른 악기로 변경 가능
 
     #         midi_stream.append(n)
+>>>>>>> 96c28053fc21db8fc2d91989e639ff189df5d1f8
 
     ################################################################################
     # MIDI 파일 저장 # got_temp_midi로 저장하게 만들기
