@@ -8,19 +8,10 @@ from IPython.display import Audio, display
 import subprocess
 
 
-<<<<<<< HEAD
-def generate_music(load_path, file_path, inst_list, main_inst):
+def generate_music(load_path, file_path, main_inst, inst_list, number):
     directory_path = '/content/drive/MyDrive/giga_bach/getmusic'
     os.chdir(directory_path)
-    command = f'python track_generation.py --load_path {load_path} --file_path {file_path} --main_inst {main_inst} --inst_list {inst_list}'
-=======
-def generate_music(load_path, file_path):
-    directory_path = "/content/drive/MyDrive/giga_bach/getmusic"
-    os.chdir(directory_path)
-    command = (
-        f"python track_generation.py --load_path {load_path} --file_path {file_path}"
-    )
->>>>>>> 96c28053fc21db8fc2d91989e639ff189df5d1f8
+    command = f'python track_generation.py --load_path {load_path} --file_path {file_path} --main_inst {main_inst} --inst_list {inst_list} --number {number}'
     subprocess.run(command, shell=True)
 
 
@@ -30,16 +21,14 @@ def convert_midi_to_wav(input_folder, output_folder):
     for filename in os.listdir(input_folder):
         if filename.endswith(".midi") or filename.endswith(".mid"):
             midi_path = os.path.join(input_folder, filename)
-            wav_path = os.path.join(
-                output_folder, os.path.splitext(filename)[0] + ".wav"
-            )
+            wav_path = os.path.join(output_folder, os.path.splitext(filename)[0] + ".wav")
             fs.midi_to_audio(midi_path, wav_path)
 
     print("모든 미디 파일을 WAV 파일로 변환하였습니다.")
 
 
 def play_audio_files(audio_folder):
-    supported_formats = [".wav", ".mp3", ".ogg", ".flac"]
+    supported_formats = ['.wav', '.mp3', '.ogg', '.flac']
 
     for filename in os.listdir(audio_folder):
         if any(filename.endswith(format) for format in supported_formats):
@@ -47,18 +36,6 @@ def play_audio_files(audio_folder):
             display(Audio(file_path, autoplay=True))
 
 
-<<<<<<< HEAD
-generate_music('/content/drive/MyDrive/giga_bach/checkpoint.pth', '/content/drive/MyDrive/giga_bach/APTITUDE/media/got_temp_midi', 'p', 'b d g')
-convert_midi_to_wav('/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result', '/content/drive/MyDrive/giga_bach/APTITUDE/media/midi2wav')
-play_audio_files('/content/drive/MyDrive/giga_bach/APTITUDE/media/midi2wav')
-=======
-generate_music(
-    "/content/drive/MyDrive/giga_bach/checkpoint.pth",
-    "/content/drive/MyDrive/giga_bach/APTITUDE/media/got_temp_midi",
-)
-convert_midi_to_wav(
-    "/content/drive/MyDrive/giga_bach/APTITUDE/media/got_temp_midi",
-    "/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result",
-)
-play_audio_files("/content/drive/MyDrive/giga_bach/APTITUDE/media/midi2wav")
->>>>>>> 96c28053fc21db8fc2d91989e639ff189df5d1f8
+#generate_music('/content/drive/MyDrive/giga_bach/checkpoint.pth', '/content/drive/MyDrive/giga_bach/APTITUDE/media/got_temp_midi', 'p', 'b d g')
+#convert_midi_to_wav('/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result', '/content/drive/MyDrive/giga_bach/APTITUDE/media/midi2wav')
+#play_audio_files('/content/drive/MyDrive/giga_bach/APTITUDE/media/midi2wav')
