@@ -38,14 +38,14 @@ def play_audio_files(audio_folder):
             display(Audio(file_path, autoplay=True))
 
 
-generate_music(
-    "/content/drive/MyDrive/giga_bach/checkpoint.pth",
-    "/content/drive/MyDrive/giga_bach/APTITUDE/media/got_temp_midi",
-    "p",
-    "b d g",
-)
-convert_midi_to_wav(
-    "/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result",
-    "/content/drive/MyDrive/giga_bach/APTITUDE/media/midi2wav",
-)
-play_audio_files("/content/drive/MyDrive/giga_bach/APTITUDE/media/midi2wav")
+# generate_music(
+#     "/content/drive/MyDrive/giga_bach/checkpoint.pth",
+#     "/content/drive/MyDrive/giga_bach/APTITUDE/media/got_temp_midi",
+#     "p",
+#     "b d g",
+# )
+# convert_midi_to_wav(
+#     "/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result",
+#     "/content/drive/MyDrive/giga_bach/APTITUDE/media/midi2wav",
+# )
+# play_audio_files("/content/drive/MyDrive/giga_bach/APTITUDE/media/midi2wav")

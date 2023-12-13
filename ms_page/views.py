@@ -28,30 +28,25 @@ def make_song(request):
                 sound2midi(audio_file_path)
 
             # 선택된 값을 세션에 저장
-            # condition_name = request.POST.getlist("condition")
-            # content_name = request.POST.getlist("content")
-            # request.session["condition_name"] = condition_name
-            # request.session["content_name"] = content_name
-            
-            # condition_name = " ".join(condition_name)
-            # content_name = " ".join(content_name)
-            
-            # load_path = "/content/drive/MyDrive/giga_bach/checkpoint.pth"
-            # file_path = "/content/drive/MyDrive/giga_bach/APTITUDE/media/got_temp_midi"
-            # generate_music(load_path, file_path, condition_name, content_name)
+            condition_name = request.POST.getlist("condition")
+            content_name = request.POST.getlist("content")
+            request.session["condition_name"] = condition_name
+            request.session["content_name"] = content_name
+
+            condition_name = " ".join(condition_name)
+            content_name = " ".join(content_name)
+
+            load_path = "/content/drive/MyDrive/giga_bach/checkpoint.pth"
+            file_path = "/content/drive/MyDrive/giga_bach/APTITUDE/media/got_temp_midi"
+            generate_music(load_path, file_path, condition_name, content_name)
 
             # input_folder = "/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result"
             # output_folder = "/content/drive/MyDrive/giga_bach/APTITUDE/media/midi2wav"
             # convert_midi_to_wav(input_folder, output_folder)
 
-            load_path = "G:/내 드라이브/giga_bach/checkpoint.pth"
-            file_path = "G:/내 드라이브/giga_bach/APTITUDE/media/got_temp_midi"
-            generate_music(load_path, file_path, condition_name, content_name)
-
-            input_folder = "G:/내 드라이브/giga_bach/APTITUDE/media/getmusic_result"
-            output_folder = "G:/내 드라이브/giga_bach/APTITUDE/media/midi2wav"
-            convert_midi_to_wav(input_folder, output_folder)
-
+            directory_path = '/content/drive/MyDrive/giga_bach/'
+            os.chdir(directory_path)
+            
             # make_song 페이지로 리다이렉트
             return redirect("ms_result")
     else:

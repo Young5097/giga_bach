@@ -9,9 +9,9 @@ import librosa.display
 import numpy as np
 import pandas as pd
 from music21 import converter, note, stream, environment, instrument
-
-# from midi2audio import FluidSynthchordError
+from midi2audio import FluidSynth
 from midiutil import MIDIFile
+import os
 
 
 def sound2midi(audio_path):  # 오디오 파일 경로 -> input_sound에서 휘파람이나 흥얼거림 노래 파일을 받아옴
@@ -277,7 +277,7 @@ def sound2midi(audio_path):  # 오디오 파일 경로 -> input_sound에서 휘�
         ],
         ignore_index=True,
     )
-    
+
     # MIDI 파일 생성을 위한 설정
     midi_stream = stream.Stream()
     midi_stream.append(note.Rest())  # 아무 소리도 나지 않는 레스트 추가
@@ -293,37 +293,32 @@ def sound2midi(audio_path):  # 오디오 파일 경로 -> input_sound에서 휘�
 
             # MIDI 노트 이벤트 추가
             midi_stream.append(note.Note(key, quarterLength=end_time - start_time))
-<<<<<<< HEAD
-=======
-
-    # MIDI 파일 생성을 위한 설정
-    # midi_stream = stream.Score()
-
-    # 스트림에 악기 추가 (예: 'Violin' 악기)
-    # midi_stream.append(instrument.Violin())
-
-    # 처음에 레스트 추가
-    # midi_stream.append(note.Rest(quarterLength=1.0))
-
-    # 키에 따라 MIDI 이벤트 추가
-    # for index, row in combined_df.iterrows():
-    #     key = row["key"]
-
-    #     'Unknown' 값이 아닌 경우에만 MIDI 노트 이벤트 추가
-    #     if key != "Unknown":
-    #         start_time = row["start_time"]
-    #         end_time = row["end_time"]
-
-    #         MIDI 노트 이벤트 추가
-    #         n = note.Note(key, quarterLength=end_time - start_time)
-
-    #         노트에 악기 설정
-    #         n.instrument = instrument.Violin()  # 다른 악기로 변경 가능
-
-    #         midi_stream.append(n)
->>>>>>> 96c28053fc21db8fc2d91989e639ff189df5d1f8
 
     ################################################################################
     # MIDI 파일 저장 # got_temp_midi로 저장하게 만들기
-    midi_stream.write("midi", fp="APTITUDE/media/got_temp_midi/outputs.mid")
+    midi_stream.write("midi", fp="APTITUDE/media/got_temp_midi/outputs.mid", append=True)
     ################################################################################
+
+    # output_dir = "APTITUDE/media/got_temp_midi/"
+    # base_filename = "outputs"
+
+    # # 디렉토리 내의 파일 목록 가져오기
+    # existing_files = os.listdir(output_dir)
+
+    # # 파일 목록 중 가장 큰 인덱스 찾기
+    # max_index = 0
+    # for filename in existing_files:
+    #     if filename.startswith(base_filename):
+    #         try:
+    #             index = int(filename[len(base_filename):-4])
+    #             max_index = max(max_index, index)
+    #         except ValueError:
+    #             pass
+
+    # # 새로운 파일명 생성
+    # new_index = max_index + 1
+    # new_filename = f"{base_filename}{new_index}.mid"
+    # file_path = os.path.join(output_dir, new_filename)
+
+    # # 모델 돌린 결과를 파일에 기록
+    # midi_stream.write("midi", fp=file_path, append=True)
