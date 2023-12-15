@@ -25,8 +25,11 @@ def make_song(request):
             # sound2midi ##########################
             if audio_file_path.endswith(".midi") or audio_file_path.endswith(".mid"):
                 identify_instruments(audio_file_path)
+                
+                old_path = audio_file_path
+                new_path = '/content/drive/MyDrive/giga_bach/APTITUDE/media/got_temp_midi/outputs.mid'
+                os.rename(old_path, new_path)
             else:
-                print(audio_file_path)
                 sound2midi(audio_file_path)
             ########################################
             
@@ -47,9 +50,6 @@ def make_song(request):
             generate_music(load_path, file_path, condition_name, content_name, 0)
             directory_path = '/content/drive/MyDrive/giga_bach/'
             os.chdir(directory_path)
-            #midi_path = '/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result/midi0/outputs.mid'
-            #csv_path = '/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result/midi2csv/midi0.csv'
-            #midi_to_csv(midi_path, csv_path)
             
             # 1번째 모델 생성##########
             file_path = "/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result/midi0"
@@ -92,6 +92,15 @@ def make_song(request):
             output_folder = "/content/drive/MyDrive/giga_bach/APTITUDE/media/midi2wav"
             convert_midi_to_wav(input_folder, output_folder)
             #################################
+            
+            # 파일 삭제 #######################
+            os.remove('/content/drive/MyDrive/giga_bach/APTITUDE/media/got_temp_midi/outputs.mid')
+            os.remove('/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result/midi0/outputs.mid')
+            os.remove('/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result/midi1/outputs.mid')
+            os.remove('/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result/midi2/outputs.mid')
+            os.remove('/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result/midi2df2midi/output_mid.mid')
+            os.remove('/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result/output_mid.mid')
+            ##################################
             
             return redirect("ms_result")
     else:

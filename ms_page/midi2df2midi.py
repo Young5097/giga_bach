@@ -6,13 +6,13 @@ def extract_notes_and_chords(music_element, offset):
     result = []
     if 'Chord' in music_element.classes:
         for pitch in music_element.pitches:
-            result.append((offset, pitch.ps, music_element.volume.velocity))
+            result.append((offset, pitch.ps, music_element.volume.velocity, music_element.duration.quarterLength))
     elif 'Note' in music_element.classes:
-        result.append((offset, music_element.pitch.ps, music_element.volume.velocity))
+        result.append((offset, music_element.pitch.ps, music_element.volume.velocity, music_element.duration.quarterLength))
     return result
 
 def extract_piano_notes(part):
-    data = {'Offset': [], 'Pitch': [], 'Velocity': []}
+    data = {'Offset': [], 'Pitch': [], 'Velocity': [], 'Duration': []}
     offset = 0
 
     for element in part.flat.notesAndRests:
@@ -20,6 +20,7 @@ def extract_piano_notes(part):
             data['Offset'].append(note_info[0])
             data['Pitch'].append(note_info[1])
             data['Velocity'].append(note_info[2])
+            data['Duration'].append(note_info[3])
         offset += element.duration.quarterLength
 
     return pd.DataFrame(data)
@@ -68,22 +69,29 @@ def dataframe_to_midi(dataframe, output_midi_path):
         offset = row['Offset']
         pitch = row['Pitch']
         velocity = row['Velocity']
+        duration = row['Duration']
 
         if not pd.isnull(pitch):  # Check if it's a note (not a rest)
             n = note.Note()
             n.pitch.ps = pitch
             n.volume.velocity = velocity
+            n.duration.quarterLength = duration
             piano_part.append(n)
         else:  # It's a rest
             r = note.Rest()
-            r.duration.quarterLength = row['Duration']
+            r.duration.quarterLength = duration
             piano_part.append(r)
 
     # Add the piano part to the MIDI stream
     midi_stream.append(piano_part)
 
+    original_midi_file_path = '/content/drive/MyDrive/giga_bach/APTITUDE/media/got_temp_midi/outputs.mid' #origin file path
+    original_midi_stream = converter.parse(original_midi_file_path)
+    # 원본 MIDI 파일에서 템포 마킹을 가져옵니다.
+    tempo_marking = original_midi_stream.flat.getElementsByClass(tempo.MetronomeMark)[0]
+
     # Set tempo and meter (you can adjust these parameters)
-    midi_stream.append(tempo.MetronomeMark(number=160))
+    midi_stream.append(tempo.MetronomeMark(number=tempo_marking.number))
     midi_stream.append(meter.TimeSignature('4/4'))
 
     # Write the stream to a MIDI file

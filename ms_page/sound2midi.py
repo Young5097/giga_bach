@@ -293,6 +293,8 @@ def sound2midi(audio_path):  # 오디오 파일 경로 -> input_sound에서 휘�
 
             # MIDI 노트 이벤트 추가
             midi_stream.append(note.Note(key, quarterLength=end_time - start_time))
+            
+    
 
     ################################################################################
     # MIDI 파일 저장 # got_temp_midi로 저장하게 만들기
