@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
-{% block content%}
+{% block content %}
 {% load static %}
-<h2>ms_result</h2>
-<ul>
-    {% if midi_file_path %}
-        <p>MIDI file is ready for download: <a href="{% url 'download_midi' %}">Download MIDI</a></p>
-    {% else %}
-        <p>Error: MIDI file not found.</p>
-    {% endif %}
-</ul>
+<link rel="stylesheet" type="text/css" href="{% static 'style/ms_page/style.css' %}">
+<div class="content-container">
+    <h2 class="mt-4">ms_result</h2>
+    <ul class="list-group mt-4">
+        {% if midi_file_path %}
+        <!--<li class="list-group-item">생성된 파일 다운로드: <a href="{% url 'download_wav' %}" class="btn btn-success">Download WAV</a></li>-->
+            <li class="list-group-item">생성된 파일 다운로드: <a href="{% url 'download_midi' %}" class="btn btn-success">Download WAV</a></li>
+        {% else %}
+            <li class="list-group-item text-danger">Error: WAV file not found.</li>
+        {% endif %}
+    </ul>
+</div>
 {% endblock %}

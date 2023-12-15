@@ -40,8 +40,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "main_page",
     "ms_page",
-    "mv_page",
     "board_page",
+    "bootstrap4",
 ]
 
 MIDDLEWARE = [

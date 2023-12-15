@@ -1,39 +1,40 @@
 {% extends 'base.html' %}
-{% block content%}
+{% block content %}
 {% load static %}
-<h2>Create a Song</h2>
-    <form method="post" enctype="multipart/form-data">
+<link rel="stylesheet" type="text/css" href="{% static 'style/ms_page/style.css' %}">
+<div class="content-container">
+    <h2 class="mt-4">Create a Song</h2>
+    <form method="post" enctype="multipart/form-data" class="mt-4">
         {% csrf_token %}
         {{ form.as_p }}
-        <div>
-            <div class="checkbox-box">
-                <fieldset class="mainQset">
-                    <div class="mainQ"><span>Select Condition Track</span></div>
-                    <div class="subQset">
-                        <label><input type="checkbox" name="condition" value="b">Bass</label>
-                        <label><input type="checkbox" name="condition" value="d">Drums</label>
-                        <label><input type="checkbox" name="condition" value="g">Guitar</label>
-                        <label><input type="checkbox" name="condition" value="l">Lead</label>
-                        <label><input type="checkbox" name="condition" value="p">Piano</label>
-                        <label><input type="checkbox" name="condition" value="s">Strings</label>
-                        <label><input type="checkbox" name="condition" value="c">Chords</label>
-                    </div>
-                </fieldset>
-            </div>
-            <div class="checkbox-box">
-                <fieldset class="mainQset">
-                    <div class="mainQ"><span>Select Content Track</span></div>
-                    <div class="subQset">
-                        <label><input type="checkbox" name="content" value="b">Bass</label>
-                        <label><input type="checkbox" name="content" value="d">Drums</label>
-                        <label><input type="checkbox" name="content" value="g">Guitar</label>
-                        <label><input type="checkbox" name="content" value="l">Lead</label>
-                        <label><input type="checkbox" name="content" value="p">Piano</label>
-                        <label><input type="checkbox" name="content" value="s">Strings</label>
-                    </div>
-                </fieldset>
-            </div>
+        <div class="checkbox-box mt-4">
+            <fieldset class="mainQset border p-2">
+                <legend class="w-auto">Select Condition Track</legend>
+                <div class="subQset">
+                    <label class="checkbox-inline"><input type="checkbox" name="condition" value="b">Bass</label>
+                    <label class="checkbox-inline"><input type="checkbox" name="condition" value="d">Drums</label>
+                    <label class="checkbox-inline"><input type="checkbox" name="condition" value="g">Guitar</label>
+                    <label class="checkbox-inline"><input type="checkbox" name="condition" value="l">Lead</label>
+                    <label class="checkbox-inline"><input type="checkbox" name="condition" value="p">Piano</label>
+                    <label class="checkbox-inline"><input type="checkbox" name="condition" value="s">Strings</label>
+                    <label class="checkbox-inline"><input type="checkbox" name="condition" value="c">Chords</label>
+                </div>
+            </fieldset>
         </div>
-        <button type="submit">Create</button>
+        <div class="checkbox-box mt-4">
+            <fieldset class="mainQset border p-2">
+                <legend class="w-auto">Select Content Track</legend>
+                <div class="subQset">
+                    <label class="checkbox-inline"><input type="checkbox" name="content" value="b">Bass</label>
+                    <label class="checkbox-inline"><input type="checkbox" name="content" value="d">Drums</label>
+                    <label class="checkbox-inline"><input type="checkbox" name="content" value="g">Guitar</label>
+                    <label class="checkbox-inline"><input type="checkbox" name="content" value="l">Lead</label>
+                    <label class="checkbox-inline"><input type="checkbox" name="content" value="p">Piano</label>
+                    <label class="checkbox-inline"><input type="checkbox" name="content" value="s">Strings</label>
+                </div>
+            </fieldset>
+        </div>
+        <button type="submit" class="btn btn-primary mt-4">Create</button>
     </form>
+</div>
 {% endblock %}

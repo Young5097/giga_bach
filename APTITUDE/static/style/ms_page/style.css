@@ -1,0 +1,56 @@
+/* style.css */
+.content-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h2 {
+    color: #4CAF50;
+    font-size: 25px;
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+
+.checkbox-box {
+    margin-bottom: 20px;
+}
+
+.mainQset {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.mainQ {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.subQset {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.subQset label {
+    flex: 1;
+    margin-right: 10px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #4CAF50;
+}
