@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
 from django.conf import settings
+from django.core.cache import cache
 from .forms import SongForm
 from .sound2midi import sound2midi
 from .midi_catcher import identify_instruments
@@ -21,7 +22,7 @@ def make_song(request):
             audio_file_path = song.audio_file.path
 
             request.session.clear()
-            
+
             # sound2midi ##########################
             if audio_file_path.endswith(".midi") or audio_file_path.endswith(".mid"):
                 identify_instruments(audio_file_path)
@@ -32,63 +33,68 @@ def make_song(request):
             else:
                 sound2midi(audio_file_path)
             ########################################
-            
-            
+
             # getmusic #############################
             load_path = "/content/drive/MyDrive/giga_bach/checkpoint.pth"
-            
+
             # 0번째 모델 생성##########
             condition_name = request.POST.getlist("condition")
             content_name = request.POST.getlist("content")
             request.session["condition_name"] = condition_name
             request.session["content_name"] = content_name
-            
+
             condition_name = " ".join(condition_name)
             content_name = " ".join(content_name)
 
             file_path = "/content/drive/MyDrive/giga_bach/APTITUDE/media/got_temp_midi"
             generate_music(load_path, file_path, condition_name, content_name, 0)
-            directory_path = '/content/drive/MyDrive/giga_bach/'
+            directory_path = "/content/drive/MyDrive/giga_bach/"
             os.chdir(directory_path)
             
             # 1번째 모델 생성##########
-            file_path = "/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result/midi0"
-            generate_music(load_path, file_path, 'p', 'g', 1)
-            directory_path = '/content/drive/MyDrive/giga_bach/'
+            file_path = (
+                "/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result/midi0"
+            )
+            generate_music(load_path, file_path, "p", "g", 1)
+            directory_path = "/content/drive/MyDrive/giga_bach/"
             os.chdir(directory_path)
-            
+
             # 2번째 모델 생성##########
             load_path = "/content/drive/MyDrive/giga_bach/checkpoint.pth"
-            file_path = "/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result/midi1"
-            generate_music(load_path, file_path, 'g', 'p', 2)
-            directory_path = '/content/drive/MyDrive/giga_bach/'
+            file_path = (
+                "/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result/midi1"
+            )
+            generate_music(load_path, file_path, "g", "p", 2)
+            directory_path = "/content/drive/MyDrive/giga_bach/"
             os.chdir(directory_path)
-            
+
             # csv 통합 ###############
-            directory_path = '/content/drive/MyDrive/giga_bach/ms_page'
+            directory_path = "/content/drive/MyDrive/giga_bach/ms_page"
             os.chdir(directory_path)
-            command = f'python midi2df2midi.py'
+            command = f"python midi2df2midi.py"
             subprocess.run(command, shell=True)
-            directory_path = '/content/drive/MyDrive/giga_bach'
+            directory_path = "/content/drive/MyDrive/giga_bach"
             os.chdir(directory_path)
-            
+
             # 통합된 csv로 getmusic ##
             condition_name = request.POST.getlist("condition")
             content_name = request.POST.getlist("content")
             request.session["condition_name"] = condition_name
             request.session["content_name"] = content_name
-            
+
             condition_name = " ".join(condition_name)
             content_name = " ".join(content_name)
-            
+
             file_path = "/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result/midi2df2midi"
             generate_music(load_path, file_path, condition_name, content_name, 3)
-            directory_path = '/content/drive/MyDrive/giga_bach/'
+            directory_path = "/content/drive/MyDrive/giga_bach/"
             os.chdir(directory_path)
             #######################################
-            
+
             # midi2wav#######################
-            input_folder = "/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result"
+            input_folder = (
+                "/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result"
+            )
             output_folder = "/content/drive/MyDrive/giga_bach/APTITUDE/media/midi2wav"
             convert_midi_to_wav(input_folder, output_folder)
             #################################
@@ -133,4 +139,3 @@ def download_midi(request):
             return response
     else:
         return HttpResponse("Error: MIDI file not found.")
-    
