@@ -1,0 +1,37 @@
+h2 {
+    color: black;
+    margin-top: 30px;
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 30px;
+}
+
+th {
+    color: black;
+    font-family: 'Arial', sans-serif;
+    font-size: 15px;
+}
+
+td {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+}
+
+.container {
+    margin-top: 30px;
+}
+
+.btn {
+    display: inline-block;
+    margin: 0;
+    background-color: rgb(62, 62, 62);
+    transition: background-color 0.3s;
+    border-color: rgb(62, 62, 62);
+}
+
+.btn:hover {
+    background-color: #b2b2b2;
+    border-color: rgb(62, 62, 62);
+}

@@ -1,29 +1,47 @@
 /* style.css */
 .content-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
     background-color: #fff;
+    border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
 h2 {
-    color: #4CAF50;
-    font-size: 25px;
+    color: black;
+    font-size: 35px;
     margin-bottom: 20px;
     margin-top: 0;
 }
 
+p {
+    text-align: center;
+}
+
+legend {
+    font-size: 18px;
+    font-family: 'Gowun Dodum', sans-serif;
+}
+
+label {
+    font-size: 15px;
+    font-family: 'Gowun Dodum', sans-serif;
+}
+
 .checkbox-box {
     margin-bottom: 20px;
+    max-width: 800px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .mainQset {
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 10px;
+    display: inline-block;
+    width: 800px;
 }
 
 .mainQ {
@@ -41,16 +59,14 @@ h2 {
     margin-right: 10px;
 }
 
-button {
-    background-color: #4CAF50;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+.custom-btn {
+    background-color: rgb(62, 62, 62);
+    border-color: rgb(62, 62, 62);
+    margin-bottom: 30px;
     transition: background-color 0.3s;
 }
 
-button:hover {
-    background-color: #4CAF50;
+.custom-btn:hover {
+    background-color: #b2b2b2;
+    border-color: #b2b2b2;
 }

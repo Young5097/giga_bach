@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-  <h2>Edit Profile</h2>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style/main/edit_profile.css' %}">
+  <h2>프로필 수정</h2>
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}

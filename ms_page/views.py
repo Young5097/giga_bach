@@ -11,6 +11,7 @@ from .getmusic import generate_music, convert_midi_to_wav
 import os
 import shutil
 import subprocess
+import mimetypes
 
 
 def make_song(request):
@@ -26,8 +27,11 @@ def make_song(request):
             # sound2midi ##########################
             if audio_file_path.endswith(".midi") or audio_file_path.endswith(".mid"):
                 identify_instruments(audio_file_path)
+
+                old_path = audio_file_path
+                new_path = "/content/drive/MyDrive/giga_bach/APTITUDE/media/got_temp_midi/outputs.mid"
+                os.rename(old_path, new_path)
             else:
-                print(audio_file_path)
                 sound2midi(audio_file_path)
             ########################################
 
@@ -47,9 +51,6 @@ def make_song(request):
             generate_music(load_path, file_path, condition_name, content_name, 0)
             directory_path = "/content/drive/MyDrive/giga_bach/"
             os.chdir(directory_path)
-            # midi_path = '/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result/midi0/outputs.mid'
-            # csv_path = '/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result/midi2csv/midi0.csv'
-            # midi_to_csv(midi_path, csv_path)
 
             # 1번째 모델 생성##########
             file_path = (
@@ -99,6 +100,27 @@ def make_song(request):
             convert_midi_to_wav(input_folder, output_folder)
             #################################
 
+            # 파일 삭제 #######################
+            os.remove(
+                "/content/drive/MyDrive/giga_bach/APTITUDE/media/got_temp_midi/outputs.mid"
+            )
+            os.remove(
+                "/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result/midi0/outputs.mid"
+            )
+            os.remove(
+                "/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result/midi1/outputs.mid"
+            )
+            os.remove(
+                "/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result/midi2/outputs.mid"
+            )
+            os.remove(
+                "/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result/midi2df2midi/output_mid.mid"
+            )
+            os.remove(
+                "/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result/output_mid.mid"
+            )
+            ##################################
+
             return redirect("ms_result")
     else:
         form = SongForm()
@@ -116,25 +138,25 @@ def ms_result(request):
         return HttpResponse("Error: MIDI file not found.")
 
 
-def download_midi(request):
-    # 세션에서 MIDI 파일의 경로를 가져옴
-    midi_file_path = "./APTITUDE/media/got_temp_midi/outputs.mid"
+# def download_midi(request):
+#     # 세션에서 MIDI 파일의 경로를 가져옴
+#     midi_file_path = "./APTITUDE/media/midi2wav/outputs_mid.mid"
 
-    if midi_file_path:
-        # MIDI 파일이 존재하면 파일을 읽어서 응답으로 반환
-        with open(midi_file_path, "rb") as midi_file:
-            response = HttpResponse(midi_file.read(), content_type="audio/midi")
-            response[
-                "Content-Disposition"
-            ] = f"attachment; filename={os.path.basename(midi_file_path)}"
-            return response
-    else:
-        return HttpResponse("Error: MIDI file not found.")
+#     if midi_file_path:
+#         # MIDI 파일이 존재하면 파일을 읽어서 응답으로 반환
+#         with open(midi_file_path, "rb") as midi_file:
+#             response = HttpResponse(midi_file.read(), content_type="audio/midi")
+#             response[
+#                 "Content-Disposition"
+#             ] = f"attachment; filename={os.path.basename(midi_file_path)}"
+#             return response
+#     else:
+#         return HttpResponse("Error: MIDI file not found.")
 
 
 def download_wav(request):
     # 세션에서 MIDI 파일의 경로를 가져옴
-    wav_file_path = "./APTITUDE/media/got_temp_midi/outputs.mid"
+    wav_file_path = "./APTITUDE/media/midi2wav/output_mid.wav"
 
     if wav_file_path:
         # MIDI 파일이 존재하면 파일을 읽어서 응답으로 반환
@@ -146,3 +168,21 @@ def download_wav(request):
             return response
     else:
         return HttpResponse("Error: WAV file not found.")
+
+
+def play_generated_audio(request):
+    audio_file_path = (
+        "/content/drive/MyDrive/giga_bach/APTITUDE/media/midi2wav/output_mid.wav"
+    )
+
+    if os.path.exists(audio_file_path):
+        with open(audio_file_path, "rb") as audio_file:
+            response = HttpResponse(
+                audio_file.read(), content_type=mimetypes.guess_type(audio_file_path)[0]
+            )
+            response[
+                "Content-Disposition"
+            ] = f"inline; filename={os.path.basename(audio_file_path)}"
+            return response
+    else:
+        return HttpResponse("Error: Audio file not found.")

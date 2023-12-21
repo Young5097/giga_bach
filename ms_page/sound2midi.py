@@ -284,21 +284,23 @@ def sound2midi(audio_path):  # 오디오 파일 경로 -> input_sound에서 휘�
 
     # 키에 따라 MIDI 이벤트 추가
     for index, row in combined_df.iterrows():
-        key = row['key']
+        key = row["key"]
 
         # 'Unknown' 값이 아닌 경우에만 MIDI 노트 이벤트 추가
-        if key != 'Unknown':
-            start_time = row['start_time']
-            end_time = row['end_time']
+        if key != "Unknown":
+            start_time = row["start_time"]
+            end_time = row["end_time"]
 
             # MIDI 노트 이벤트 추가
             midi_stream.append(note.Note(key, quarterLength=end_time - start_time))
-            
-    
 
     ################################################################################
     # MIDI 파일 저장 # got_temp_midi로 저장하게 만들기
-    midi_stream.write("midi", fp="APTITUDE/media/got_temp_midi/outputs.mid", append=True)
+    midi_stream.write(
+        "midi",
+        fp="/content/drive/MyDrive/giga_bach/APTITUDE/media/got_temp_midi/outputs.mid",
+        append=True,
+    )
     ################################################################################
 
     # output_dir = "APTITUDE/media/got_temp_midi/"

@@ -1,16 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'style/ms_page/style.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'style/ms_page/ms_result.css' %}">
+
 <div class="content-container">
-    <h2 class="mt-4">ms_result</h2>
+    <h2 class="mt-4">음원생성 결과</h2>
+    <p>생성된 음원 듣기 :</p>
+        <audio controls>
+            <source src="{% url 'play_generated_audio' %}" type="audio/wav">
+            Your browser does not support the audio element.
+        </audio>
+
     <ul class="list-group mt-4">
+        <div class="download">
         {% if midi_file_path %}
-        <!--<li class="list-group-item">생성된 파일 다운로드: <a href="{% url 'download_wav' %}" class="btn btn-success">Download WAV</a></li>-->
-            <li class="list-group-item">생성된 파일 다운로드: <a href="{% url 'download_midi' %}" class="btn btn-success">Download WAV</a></li>
+            <li class="list-group-item">생성된 파일 다운로드 : <a href="{% url 'download_wav' %}" class="btn btn-success">Download WAV</a></li>
         {% else %}
             <li class="list-group-item text-danger">Error: WAV file not found.</li>
         {% endif %}
+        </div>
     </ul>
+
+    <div class="bottom-buttons">
+        <a href="{% url 'make_song' %}">다시 생성하기</a>
+    </div>
 </div>
 {% endblock %}

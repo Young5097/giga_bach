@@ -1,43 +1,21 @@
 body {
     font-family: 'Arial', sans-serif;
-    margin: 0;
     padding: 0;
-    background-color: #f8f8f8;
     color: #333;
-    width: 850px;
     margin: 0 auto;
-}
-
-h1 {
-    color: #4CAF50;
     text-align: center;
-    margin-top: 20px;
+    width: 1000px;
+    background-color: rgb(246, 246, 246);
 }
 
-.topnav {
-    text-align: center;
-    overflow: hidden;
-    background-color: #333;
-    margin-top: 20px;
+.logo-container {
+    margin-left: 20px;
 }
 
-.topnav a {
-    float: left;
-    display: block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-.topnav a:hover {
-    background-color: #ddd;
-    color: black;
-}
-
-.topnav a.active {
-    background-color: #4CAF50;
-    color: white;
+.navbar-dark .navbar-nav .nav-link {
+    color: #fff;
+    margin-left: 15px;
+    font-family: "Raleway", sans-serif;
 }
 
 .login {

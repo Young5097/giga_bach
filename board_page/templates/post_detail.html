@@ -1,21 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
     {% load static %}
-    <h3>{{ post.title }}</h3>
-    <p>{{ post.content }}</p>
-    <p>작성자: {{ post.author.username }}</p>
-    <p>작성일: {{ post.created_at }}</p>
+    <link rel="stylesheet" type="text/css" href="{% static 'style/board_page/post_detail.css' %}">
+    <div class="container">
+        <div class="post-detail">
+            <h2 class="post-title">{{ post.title }}</h2>
+            <p class="post-info">작성자: {{ post.author.username }} | 작성일: {{ post.created_at }}</p>
+            <p class="audio-download">오디오 파일: <a href="{{ post.audio_file.url }}" download>다운로드</a></p>
+            <div class="post-content-container">
+                <p class="post-content">{{ post.content }}</p>
+            </div>
 
-    {% if post.audio_file %}
-        <audio controls>
-            <source src="{{ post.audio_file.url }}" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
-        <p>오디오 파일: <a href="{{ post.audio_file.url }}" download>다운로드</a></p>
-    {% endif %}
+            {% if post.audio_file %}
+                <audio controls class="audio-player">
+                    <source src="{{ post.audio_file.url }}" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            {% endif %}
 
-
-    <a href="{% url 'edit_post' post.id %}">수정</a> 
-    <a href="{% url 'board' %}">글 목록</a>
-    <a href="{% url 'delete_post' post.id %}">삭제</a>
+            <div class="post-actions">
+                <a href="{% url 'board' %}" class="btn btn-secondary">글 목록</a>
+                <a href="{% url 'edit_post' post.id %}" class="btn btn-primary">수정</a>
+                <a href="{% url 'delete_post' post.id %}" class="btn btn-danger">삭제</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

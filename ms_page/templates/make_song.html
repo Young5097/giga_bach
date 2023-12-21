@@ -3,13 +3,15 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'style/ms_page/style.css' %}">
 <div class="content-container">
-    <h2 class="mt-4">Create a Song</h2>
+    <h2 class="mt-4">음원 생성하기</h2>
     <form method="post" enctype="multipart/form-data" class="mt-4">
-        {% csrf_token %}
-        {{ form.as_p }}
+        <div class="input-file">
+            {% csrf_token %}
+            {{ form.as_p }}
+        </div>
         <div class="checkbox-box mt-4">
             <fieldset class="mainQset border p-2">
-                <legend class="w-auto">Select Condition Track</legend>
+                <legend class="w-auto">메인 악기 선택</legend>
                 <div class="subQset">
                     <label class="checkbox-inline"><input type="checkbox" name="condition" value="b">Bass</label>
                     <label class="checkbox-inline"><input type="checkbox" name="condition" value="d">Drums</label>
@@ -23,7 +25,7 @@
         </div>
         <div class="checkbox-box mt-4">
             <fieldset class="mainQset border p-2">
-                <legend class="w-auto">Select Content Track</legend>
+                <legend class="w-auto">추가 악기 선택</legend>
                 <div class="subQset">
                     <label class="checkbox-inline"><input type="checkbox" name="content" value="b">Bass</label>
                     <label class="checkbox-inline"><input type="checkbox" name="content" value="d">Drums</label>
@@ -34,7 +36,9 @@
                 </div>
             </fieldset>
         </div>
-        <button type="submit" class="btn btn-primary mt-4">Create</button>
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary custom-btn">생성하기</button>
+        </div>
     </form>
 </div>
 {% endblock %}
