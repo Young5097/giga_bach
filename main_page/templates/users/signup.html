@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
 {% block content%}
-<h1>회원가입</h1>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style/main/signup.css' %}">
+<h2>회원가입</h2>
 <form method="post" action="{% url 'signup' %}">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">가입하기</button>
+    <div class="container-content">
+        <button type="submit">가입하기</button>
+        <button><a href="{% url 'main' %}">취소</a></button>
+    </div>
 </form>
-<a href="{% url 'main' %}">취소</a></li>
 {% endblock %}

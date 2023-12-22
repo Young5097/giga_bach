@@ -1,25 +1,32 @@
 h2 {
-    color: black;
-    margin-bottom: 20px;
-    margin-top: 20px;
     font-family: 'Black Han Sans', sans-serif;
-    font-size: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+p {
+    text-align: center;
 }
 
 label {
     width: 80px;
-    text-align: center;
 }
 
-p {
-    text-align: left;
+a {
+    color: white
 }
+
+.container-content {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 
 button {
     display: inline-block;
-    margin: 0 10px;
+    margin: 0 5px;
     margin-top: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     background-color: rgb(62, 62, 62);
     color: white;
     text-decoration: none;
@@ -27,6 +34,6 @@ button {
     transition: background-color 0.3s;
 }
 
-button a:hover {
+button:hover {
     background-color: #b2b2b2;
 }

@@ -1,14 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>로그인</h1>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style/main/login.css' %}">
+<h2>로그인</h2>
 <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
     <div>
-        <label for="username">사용자 ID</label>
+        <label for="username">사용자 ID : </label>
         <input type="text" name="username" id="username">
     </div>
     <div>
-        <label for="password">비밀번호</label>
+        <label for="password">비밀번호 : </label>
         <input type="password" name="password" id="password">
     </div>
     <button type="submit">로그인</button>
@@ -16,13 +18,11 @@
 
 <!-- 아이디 찾기, 비밀번호 찾기, 회원 가입 링크 -->
 <div>
-    <p>계정 관리:</p>
-    <ul>
-        <li><a href="{% url 'find_username' %}">아이디 찾기</a></li>
-        <li><a href="#password">비밀번호 찾기</a></li>
-        <li><a href="{% url 'signup' %}">회원 가입</a></li>
+    <div class="container-content">
+        <button><a href="{% url 'find_username' %}">아이디 찾기</a></button>
+        <button><a href="#password">비밀번호 찾기</a></button>
+        <button><a href="{% url 'signup' %}">회원 가입</a></button>
+        <button><a href="{% url 'main' %}">취소</a></button>
     </ul>
-    <br>
-    <a href="{% url 'main' %}">취소</a></li>
 </div>
 {% endblock %}

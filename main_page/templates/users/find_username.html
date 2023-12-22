@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
     {% block content %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style/main/find_username.css' %}">
     <h2>아이디 찾기</h2>
     {% if username %}
         <p>찾은 아이디: {{ username }}</p>
@@ -13,8 +15,9 @@
         {% csrf_token %}
         <p>{{ form.first_name.label_tag }} {{ form.first_name }}</p>
         <p>{{ form.email.label_tag }} {{ form.email }}</p>
-        <button type="submit">아이디 찾기</button>
+        <div class="container-content">
+            <button type="submit">아이디 찾기</button>
+            <button><a href="{% url 'main' %}">취소</a></button>
+        </div>
     </form>
-    <br>
-    <a href="{% url 'main' %}">취소</a></li>
     {% endblock %}

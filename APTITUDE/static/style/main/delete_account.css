@@ -6,27 +6,23 @@ h2 {
     font-size: 30px;
 }
 
-label {
-    width: 80px;
-    text-align: center;
-}
-
 p {
-    text-align: left;
+    text-align: center;
 }
 
 button {
     display: inline-block;
-    margin: 0 10px;
-    margin-top: 10px;
+    margin: 0 5px;
+    margin-top: 20px;
     margin-bottom: 20px;
     background-color: rgb(62, 62, 62);
+    border: rgb(62, 62, 62);
     color: white;
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s;
 }
 
-button a:hover {
+button:hover {
     background-color: #b2b2b2;
 }

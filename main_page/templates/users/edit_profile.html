@@ -6,7 +6,9 @@
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">저장하기</button>
   </form>
-  <a href="{% url 'mypage' %}">취소</a></li>
+  <div class="button-container">
+    <button type="submit" class="btn btn-primary">저장하기</button>
+    <button class="btn btn-secondary"><a href="{% url 'mypage' %}">취소</a></button>
+  </div>
 {% endblock %}
