@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style/main/delete_account.css' %}">
   <h2>Delete Account</h2>
   <p>정말로 회원 탈퇴하시겠습니까?</p>
   <form method="post">

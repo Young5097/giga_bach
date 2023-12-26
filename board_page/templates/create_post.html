@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
     {% block content %}
     {% load static %}
-    <h3>게시물 작성</h3>
+    <link rel="stylesheet" type="text/css" href="{% static 'style/board_page/create_page.css' %}">
+
+    <h2>게시물 작성</h2>
 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}

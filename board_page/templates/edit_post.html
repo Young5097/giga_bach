@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-    <h3>게시글 수정</h3>
+<link rel="stylesheet" type="text/css" href="{% static 'style/board_page/edit_post.css' %}">
+    <h2>게시글 수정</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">수정 완료</button>
+        <div class="button-container">
+            <button type="submit" class="btn btn-primary">수정 완료</button>
+            <button href="{% url 'post_detail' post.id %}" class="btn btn-secondary">취소</button>
+        </div>
     </form>
-    <a href="{% url 'post_detail' post.id %}">취소</a> 
 {% endblock %}

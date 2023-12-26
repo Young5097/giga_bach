@@ -12,17 +12,32 @@ import os
 import shutil
 import subprocess
 import mimetypes
+from .models import Song
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+
 
 
 def make_song(request):
     if request.method == "POST":
         form = SongForm(request.POST, request.FILES)
         if form.is_valid():
-            song = form.save()
+            
+            #선택 악기 및 제목과 파일경로 db 저장 #########
+            condition_track = request.POST.getlist("condition")
+            content_track = request.POST.getlist("content")
+
+            condition_track = "  ".join(condition_track)
+            content_track = "  ".join(content_track)
+            
+            song = form.save(commit=False)
+            song.user = request.user
+            song.condition_track = condition_track
+            song.content_track = content_track
+            song.save()
 
             audio_file_path = song.audio_file.path
-
-            request.session.clear()
+            #############################################
 
             # sound2midi ##########################
             if audio_file_path.endswith(".midi") or audio_file_path.endswith(".mid"):
@@ -38,17 +53,9 @@ def make_song(request):
             # getmusic #############################
             load_path = "/content/drive/MyDrive/giga_bach/checkpoint.pth"
 
-            # 0번째 모델 생성##########
-            condition_name = request.POST.getlist("condition")
-            content_name = request.POST.getlist("content")
-            request.session["condition_name"] = condition_name
-            request.session["content_name"] = content_name
-
-            condition_name = " ".join(condition_name)
-            content_name = " ".join(content_name)
-
+            # 0번째 모델 생성#########
             file_path = "/content/drive/MyDrive/giga_bach/APTITUDE/media/got_temp_midi"
-            generate_music(load_path, file_path, condition_name, content_name, 0)
+            generate_music(load_path, file_path, condition_track, content_track, 0)
             directory_path = "/content/drive/MyDrive/giga_bach/"
             os.chdir(directory_path)
 
@@ -69,7 +76,7 @@ def make_song(request):
             directory_path = "/content/drive/MyDrive/giga_bach/"
             os.chdir(directory_path)
 
-            # csv 통합 ###############
+            # df 통합 ###############
             directory_path = "/content/drive/MyDrive/giga_bach/ms_page"
             os.chdir(directory_path)
             command = f"python midi2df2midi.py"
@@ -77,17 +84,9 @@ def make_song(request):
             directory_path = "/content/drive/MyDrive/giga_bach"
             os.chdir(directory_path)
 
-            # 통합된 csv로 getmusic ##
-            condition_name = request.POST.getlist("condition")
-            content_name = request.POST.getlist("content")
-            request.session["condition_name"] = condition_name
-            request.session["content_name"] = content_name
-
-            condition_name = " ".join(condition_name)
-            content_name = " ".join(content_name)
-
+            # 통합된 df로 getmusic ##
             file_path = "/content/drive/MyDrive/giga_bach/APTITUDE/media/getmusic_result/midi2df2midi"
-            generate_music(load_path, file_path, condition_name, content_name, 3)
+            generate_music(load_path, file_path, condition_track, content_track, 3)
             directory_path = "/content/drive/MyDrive/giga_bach/"
             os.chdir(directory_path)
             #######################################
@@ -100,7 +99,7 @@ def make_song(request):
             convert_midi_to_wav(input_folder, output_folder)
             #################################
 
-            # 파일 삭제 #######################
+            # 파일 삭제 (덮어쓰기 오류 방지) #######################
             os.remove(
                 "/content/drive/MyDrive/giga_bach/APTITUDE/media/got_temp_midi/outputs.mid"
             )
@@ -138,22 +137,6 @@ def ms_result(request):
         return HttpResponse("Error: MIDI file not found.")
 
 
-# def download_midi(request):
-#     # 세션에서 MIDI 파일의 경로를 가져옴
-#     midi_file_path = "./APTITUDE/media/midi2wav/outputs_mid.mid"
-
-#     if midi_file_path:
-#         # MIDI 파일이 존재하면 파일을 읽어서 응답으로 반환
-#         with open(midi_file_path, "rb") as midi_file:
-#             response = HttpResponse(midi_file.read(), content_type="audio/midi")
-#             response[
-#                 "Content-Disposition"
-#             ] = f"attachment; filename={os.path.basename(midi_file_path)}"
-#             return response
-#     else:
-#         return HttpResponse("Error: MIDI file not found.")
-
-
 def download_wav(request):
     # 세션에서 MIDI 파일의 경로를 가져옴
     wav_file_path = "./APTITUDE/media/midi2wav/output_mid.wav"
@@ -186,3 +169,8 @@ def play_generated_audio(request):
             return response
     else:
         return HttpResponse("Error: Audio file not found.")
+
+def logout_view(request):
+    logout(request)
+    # 로그아웃 후 리다이렉트할 페이지 지정 (예: 홈페이지)
+    return redirect('/')

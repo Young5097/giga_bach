@@ -1,0 +1,50 @@
+h2 {
+    color: black;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 30px;
+}
+
+label {
+    width: 80px;
+    text-align: center;
+}
+
+p {
+    text-align: left;
+}
+
+.btn {
+    margin-right: 10px;
+}
+
+.btn-primary {
+    display: inline-block;
+    margin: 0 5px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: white;
+    background-color: #007bff;
+    border: #007bff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn-secondary {
+    display: inline-block;
+    margin: 0 5px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    background-color: rgb(62, 62, 62);
+    border: rgb(62, 62, 62);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn-secondary a:hover {
+    background-color: #b2b2b2;
+}
