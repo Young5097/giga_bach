@@ -1,6 +1,13 @@
 # giga_bach
+[최종포트폴리오.pptx](https://github.com/user-attachments/files/17014139/3.ppt.pptx)
+
+# 프로젝트 개요
+- 인원 : 4명
+- 진행기간 : 7주
+- 목표 : 멜로디를 통한 음원생성AI 기반 웹서비스 구현
 
 ## 12 7일
+
  + 1. track_generation.py 875번줄 content_text => 악기 넣는 파트 / 어떻게 사용자가 입력을 줄지
  + 2. choice_inst 함수로 기능하게
  + 3. ms_result에서 다운/음악재생
